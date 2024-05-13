@@ -30,7 +30,7 @@ function CalcSalary(props: IProps) {
 
     const mapKeyValue = (mapKey: string) => {
         var value = 0;
-        var tax = (salary / 100 * 89.5) - depentSelf - (depentFamily * personDepentdent)
+        var tax = (salary / 100 * 89.5) - depentSelf - (depentFamily * personDepentdent) > 0 ? (salary / 100 * 89.5) - depentSelf - (depentFamily * personDepentdent) : 0
         var tax5 = tax > 0 ? (tax > p5 ? p5 : tax) / 100 * 5 : 0
         var tax10 = tax > p5 ? (tax > p10 ? p10 - p5 : (tax - p5)) / 100 * 10 : 0
         var tax15 = tax > p10 ? (tax > p18 ? p18 - p10 : (tax - p10)) / 100 * 15 : 0
@@ -52,7 +52,7 @@ function CalcSalary(props: IProps) {
                 value = -(salaryBH / 100 * 1)
                 break;
             case 'salaryBeforeTax':
-                value = salary - (salaryBH / 100 * 10.5)
+                value = salary - (salaryBH / 100 * 10.5) > 0 ? salary - (salaryBH / 100 * 10.5) : 0
                 break;
             case 'person1':
                 value = depentSelf
@@ -88,7 +88,7 @@ function CalcSalary(props: IProps) {
                 value = tax35
                 break;
             case 'salaryActual':
-                value = (salary - (salaryBH / 100 * 10.5)) - (tax5 + tax10 + tax15 + tax20 + tax25 + tax30 + tax35)
+                value = (salary - (salaryBH / 100 * 10.5)) - (tax5 + tax10 + tax15 + tax20 + tax25 + tax30 + tax35) > 0 ? (salary - (salaryBH / 100 * 10.5)) - (tax5 + tax10 + tax15 + tax20 + tax25 + tax30 + tax35) : 0
                 break;
             default:
                 break;
