@@ -1,0 +1,97 @@
+.box-salary-item {
+    border: 1px solid #2979ff;
+    border-radius: 8px;
+    margin: 0 6px;
+}
+
+.header-salary-calc-title {
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-salary-result-title {
+    color: rgba(65, 64, 69, var);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.box-salary-result {
+    background-color: rgba(225, 240, 255);
+    /* border-radius: 8px; */
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+}
+
+.salary-result {
+    color: rgba(69, 29, 160);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.salary-note {
+    color: rgba(111, 109, 113);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.table-salary-line {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    min-height: 40px;
+    border-top: 1px solid;
+
+}
+
+.table-salary-line.actived {
+    background-color: rgba(240, 237, 248);
+    border-radius: 8px;
+}
+
+.table-salary-line:first-child {
+    border-top: none;
+}
+
+.salary-table-const {
+    min-width: 200px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 12px;
+}
+
+.box-table-salary {
+    margin: 8px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+.salary-table-percent-const {
+    min-width: 100px;
+    display: flex;
+    justify-content: end;
+}
+
+.btn-text-primary {
+    cursor: pointer;
+    color: #2979ff;
+}
+
+.btn-tab-item {
+    border-radius: 8px;
+    border: 1px solid #2979ff;
+    color: blueviolet;
+    padding: 8px 12px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.btn-tab-item:hover {
+    color: #fff;
+    background: #2979ff;
+}
