@@ -111,6 +111,11 @@ function App() {
             personDepentdent={personDepentdent} />
         </div>
       </div>
+      <div style={{ minHeight: "80px" }} />
+      <div className='foolter-copyright'>
+        <div>Copyright by <a href='https://github.com/TrungXI'>Nguyễn Việt Trung</a></div>
+        <div>, Icon and Components by <a href='https://ant.design/'>Ant Design</a></div>
+      </div>
     </div >
   );
 }
