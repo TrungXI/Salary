@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { InputNumber, Checkbox, Tooltip, Modal, Table } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons'
 import './index.css'
-import { dataSalary, dataTax } from './IModel';
+import { ITable, dataSalaryGross, dataSalaryNet, dataTaxGross, dataTaxNet } from './IModel';
 import classnames from 'classnames'
 
 interface IProps {
@@ -25,7 +25,26 @@ function CalcSalary(props: IProps) {
     const _convertRegetPercent = (value?: number) => {
         if (value == null) return '-'
         // if (value < 0) return 0;
-        return `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return `${Math.round(value)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
+    const calcTaxNet = (data: number) => {
+        var value = 0;
+        if (data > 61850000) {
+            value = (data - 9850000) / 0.65
+        } else if (data > 42250000) {
+            value = (data - 5850000) / 0.7
+        } else if (data > 27250000) {
+            value = (data - 3250000) / 0.75
+        } else if (data > 16050000) {
+            value = (data - 1650000) / 0.8
+        } else if (data > 9250000) {
+            value = (data - 750000) / 0.85
+        } else if (data > 4750000) {
+            value = (data - 250000) / 0.9
+        } else
+            value = data / 0.95
+        return _convertRegetPercent(value - depentSelf > 0 ? value - depentSelf : 0);
     }
 
     const mapKeyValue = (mapKey: string) => {
@@ -96,14 +115,14 @@ function CalcSalary(props: IProps) {
         return _convertRegetPercent(value);
     }
 
-    const _renderDetailTax = () => {
+    const _renderDetailTax = (data: ITable[]) => {
         return <>
             <div className='table-salary-line'>
                 <div>Mức chịu thuế</div>
                 <div className='salary-table-percent-const'>Thuế suất</div>
                 <div className='salary-table-const'>Tiền nộp</div>
             </div>
-            {dataTax.map(a => {
+            {data.map(a => {
                 return <div className='table-salary-line' key={'tax_salary_' + a.id}>
                     <div>{a.name}</div>
                     <div className='salary-table-percent-const'>{a.percent}</div>
@@ -112,11 +131,11 @@ function CalcSalary(props: IProps) {
             })}
         </>
     }
-    const _renderTable = () => {
+    const _renderTable = (data: ITable[], dataTax: ITable[]) => {
         return <>
             <div className='ml-4 header-salary-calc-title justify-content-start'>Diễn giải</div>
             <div className='box-table-salary'>
-                {dataSalary.map(a => {
+                {data.map(a => {
                     return <div className={classnames('table-salary-line', { "actived": a.isActved })}
                         key={'salary_line_' + a.id}>
                         <div className='d-flex'>
@@ -132,7 +151,7 @@ function CalcSalary(props: IProps) {
                         </div>
                     </div>
                 })}
-                {isShowGross && _renderDetailTax()}
+                {isShowGross && _renderDetailTax(dataTax)}
             </div>
         </>
     }
@@ -146,7 +165,7 @@ function CalcSalary(props: IProps) {
                     <div className='salary-note'>Net = Thu nhập trước thuế - Thuế thu nhập cá nhân</div>
                 </div>
             </div>
-            {_renderTable()}
+            {_renderTable(dataSalaryGross, dataTaxGross)}
         </div>
     }
 
@@ -156,10 +175,10 @@ function CalcSalary(props: IProps) {
             <div className='box-salary-result'>
                 <div className='box-salary-result-title'>Thu nhập Gross</div>
                 <div className='d-flex flex-column align-items-start'>
-                    <div className='salary-result'>{`${mapKeyValue("salaryActual")} VND`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
+                    <div className='salary-result'>{`${calcTaxNet(salary)} VND`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
                 </div>
             </div>
-            {_renderTable()}
+            {_renderTable(dataSalaryNet, dataTaxNet)}
         </div>
     }
     return (<>
@@ -167,15 +186,16 @@ function CalcSalary(props: IProps) {
             <div className={classnames('btn-tab-item', { "actived": tab === 1 })}
                 onClick={() => { setTab(1) }}
             >Gross <ArrowRightOutlined /> Net</div>
-            <div className={classnames('btn-tab-item', { "actived": tab === 2 })}
+            {/* <div className={classnames('btn-tab-item', { "actived": tab === 2 })}
                 onClick={() => { setTab(2) }}
-            >Net <ArrowRightOutlined /> Gross</div>
+            >Net <ArrowRightOutlined /> Gross</div> */}
         </div>
         <div>
             {tab === 1 ? _renderGrossNet() : tab === 2 ? _renderNetGross() : null}
         </div>
     </>
     );
+
 }
 
 export default CalcSalary;

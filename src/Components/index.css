@@ -91,6 +91,7 @@
     cursor: pointer;
 }
 
+.btn-tab-item.actived,
 .btn-tab-item:hover {
     color: #fff;
     background: #2979ff;
