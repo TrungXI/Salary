@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { InputNumber, Checkbox, Tooltip, Modal, Table } from 'antd';
-import { QuestionCircleOutlined, MinusCircleOutlined, PlusCircleOutlined, ReloadOutlined, ArrowRightOutlined } from '@ant-design/icons'
+// import { InputNumber, Checkbox, Tooltip, Modal, Table } from 'antd';
+import { ArrowRightOutlined } from '@ant-design/icons'
 import './index.css'
 import { dataSalary, dataTax } from './IModel';
 import classnames from 'classnames'

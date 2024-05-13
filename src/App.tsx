@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputNumber, Checkbox, Tooltip, Modal } from 'antd';
+import { InputNumber, Checkbox, Modal } from 'antd';
 import { QuestionCircleOutlined, MinusCircleOutlined, PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons'
 import './App.css';
 import CalcSalary from './Components/CalcSalary';
